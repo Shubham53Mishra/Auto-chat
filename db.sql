@@ -1,0 +1,5 @@
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    mobile_number VARCHAR(15) NOT NULL UNIQUE
+);
