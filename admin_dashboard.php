@@ -191,6 +191,10 @@ $result = $conn->query($sql);
             background-color: #e8f5e9; /* Light green background */
             color: #4CAF50; /* Green text color */
         }
+        .input-box form select {
+            background-color: #4CAF50; /* Green background */
+            color: white; /* White text color */
+        }
         .input-box form button {
             background-color: #4CAF50; /* Green background */
             color: white;
@@ -279,6 +283,16 @@ $result = $conn->query($sql);
 <footer>
     &copy; 2024 Your Company Name. All rights reserved.
 </footer>
+
+<script>
+    function toggleSelectAll(checkbox) {
+        // Get all checkboxes in the user list
+        const checkboxes = document.querySelectorAll('.user-list .user-checkbox input[type="checkbox"]');
+        checkboxes.forEach(cb => {
+            cb.checked = checkbox.checked;
+        });
+    }
+</script>
 
 </body>
 </html>
