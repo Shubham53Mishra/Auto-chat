@@ -156,19 +156,14 @@ $result = $conn->query($sql);
             background-color: #fff;
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center; /* Center-align text */
         }
         .dashboard-box {
-            margin: 0 auto;
             padding: 20px;
             background-color: #e8f5e9; /* Light green background */
             border: 1px solid #4CAF50; /* Green border */
             border-radius: 5px;
-            display: inline-block; /* Center-align box */
-            text-align: left; /* Align text inside the box to left */
-            width: 100%; /* Full width within the container */
         }
-        .message p.success {
+         .message p.success {
             color: green;
             font-weight: bold;
         }
