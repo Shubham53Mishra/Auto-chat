@@ -121,22 +121,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Send message functionality
     if (isset($_POST['send_message'])) {
-        $message .= sendMessage($conn, $whatsapp_api_url, $access_token, 'booking_confirmed'); // Replace with the actual template name
-    }
-
-    // Hello World button functionality
-    if (isset($_POST['hello_world'])) {
-        $message .= sendMessage($conn, $whatsapp_api_url, $access_token, 'hello_world'); // Replace with the actual template name
-    }
-
-    // New button for Extend_Test template
-    if (isset($_POST['booking_test'])) {
-        $message .= sendMessage($conn, $whatsapp_api_url, $access_token, 'extend_test'); // Replaced template name
-    }
-
-    // New button for Cancel_Test template
-    if (isset($_POST['cancel_test'])) {
-        $message .= sendMessage($conn, $whatsapp_api_url, $access_token, 'cancel_test'); // Added template name
+        $template_name = $_POST['template_name'] ?? 'booking_confirmed'; // Default template
+        $message .= sendMessage($conn, $whatsapp_api_url, $access_token, $template_name);
     }
 }
 
@@ -191,14 +177,16 @@ $result = $conn->query($sql);
             font-weight: bold;
         }
         .input-box form input,
-        .input-box form button {
+        .input-box form button,
+        .input-box form select {
             margin: 10px 0;
             padding: 10px;
             width: 100%;
             box-sizing: border-box;
             border-radius: 5px;
         }
-        .input-box form input {
+        .input-box form input,
+        .input-box form select {
             border: 1px solid #4CAF50; /* Green border */
             background-color: #e8f5e9; /* Light green background */
             color: #4CAF50; /* Green text color */
@@ -232,12 +220,6 @@ $result = $conn->query($sql);
             background-color: #45a049;
         }
     </style>
-    <script>
-        function toggleSelectAll(source) {
-            const checkboxes = document.querySelectorAll('.user-box input[type="checkbox"]');
-            checkboxes.forEach(checkbox => checkbox.checked = source.checked);
-        }
-    </script>
 </head>
 <body>
 
@@ -278,11 +260,16 @@ $result = $conn->query($sql);
                         <p>No users found.</p>
                     <?php endif; ?>
                 </div>
+                <div class="input-box">
+                    <select name="template_name">
+                        <option value="booking_confirmed">Booking Confirmed</option>
+                        <option value="hello_world">Hello World</option>
+                        <option value="extend_test">Extend Test</option>
+                        <option value="cancel_test">Cancel Test</option>
+                    </select>
+                </div>
                 <div class="button-container">
-                    <button class="action-btn" type="submit" name="send_message">Booking Confirmed</button>
-                    <button class="action-btn" type="submit" name="hello_world">Hello World</button>
-                    <button class="action-btn" type="submit" name="booking_test">Extend Test</button> <!-- Updated button name -->
-                    <button class="action-btn" type="submit" name="cancel_test">Cancel Test</button> <!-- Added button for cancel_test -->
+                    <button class="action-btn" type="submit" name="send_message">Send Message</button>
                 </div>
             </form>
         </div>
