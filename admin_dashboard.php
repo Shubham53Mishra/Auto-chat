@@ -117,8 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // WhatsApp Business API URL and Access Token
     $whatsapp_api_url = "https://graph.facebook.com/v20.0/430568443461658/messages";
-    $access_token = "EAARMxPiCSEQBO0XRmY6G7g3EitQePB0YCR4DtIBW5V6iEYV2kQgZCNZAvphR1GztyOuY6cahfDKOdWvbTNu29ZAnT9PfrQeBgiPhuV2RYJwnr7OenBLFN7c0uDBhjBNuUqHYBs8UZAy4DyRFZAvzeCaZCwvTE9FDPkbVicSYBuzDddUtp5PLSTalUZAXZBtRXQnwV1x0T4eHFRL3ZCskL4gZBAPZAZBcgB4VF0HOPmcZD";
-
+    $access_token = "EAARMxPiCSEQBOZBXhaj6VQlUgHPpLYlacckIEEz2GIwZB013GC4XjTOKugZAm4hT6N8aKVtDs1yx9COlPqrMJ5lnuXPl2HADYRDO4ZCZCC9WibGgBV3ZCT60DRqy0ptYow91HoR8cVMACfOWxENs9k6LX9wwZBT2kKdqMBkx7Kexg1hWnjsInAyAlmcUwie1s2aTZApltvDiRQOSSjj0MZBRwNBeZAJVxSiZAN4yZCEZD";
     // Send message functionality
     if (isset($_POST['send_message'])) {
         $template_name = $_POST['template_name'] ?? 'booking_confirmed'; // Default template
@@ -208,8 +207,10 @@ $result = $conn->query($sql);
             margin-top: 20px;
         }
         .action-btn {
-            margin: 5px;
-            padding: 10px;
+            margin: 25px auto;
+            margin-top: 30px;
+
+            padding: 30px;
             background-color: #4CAF50; /* Green color */
             color: white;
             border: none;
@@ -246,8 +247,8 @@ $result = $conn->query($sql);
             border-color: #388e3c; /* Darker green border on hover */
         }
         #dropdown option {
-            background-color: white; /* Background color of options */
-            color: black; /* Text color of options */
+            background-color: #45a049; /* Background color of options */
+            color: white; /* Text color of options */
         }
     </style>
 </head>
@@ -297,6 +298,7 @@ $result = $conn->query($sql);
                         <option value="hello_world">Hello World</option>
                         <option value="extend_test">Extend Test</option>
                         <option value="cancel_test">Cancel Test</option>
+                        <option value="rent_bike">Bike Rent</option>
                     </select>
                 </div>
                 <div class="button-container">
