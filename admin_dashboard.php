@@ -128,6 +128,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['hello_world'])) {
         $message .= sendMessage($conn, $whatsapp_api_url, $access_token, 'hello_world'); // Replace with the actual template name
     }
+
+    // New button for Extend_Test template
+    if (isset($_POST['booking_test'])) {
+        $message .= sendMessage($conn, $whatsapp_api_url, $access_token, 'extend_test'); // Replaced template name
+    }
+
+    // New button for Cancel_Test template
+    if (isset($_POST['cancel_test'])) {
+        $message .= sendMessage($conn, $whatsapp_api_url, $access_token, 'cancel_test'); // Added template name
+    }
 }
 
 // Fetch customer details for display
@@ -240,59 +250,47 @@ $result = $conn->query($sql);
 
         <!-- Display any messages -->
         <div class="message">
-            <?= $message ?>
+            <?php echo $message; ?>
         </div>
 
-        <!-- Form to add a new user -->
+        <!-- User Input Form -->
         <div class="input-box">
             <form method="POST" action="">
                 <input type="text" name="full_name" placeholder="Full Name" required>
-                <input type="tel" name="phone_number" placeholder="Phone Number" required>
-                <input type="email" name="email" placeholder="Email (optional)">
+                <input type="text" name="phone_number" placeholder="Phone Number" required>
+                <input type="email" name="email" placeholder="Email (Optional)">
                 <button type="submit">Add User</button>
             </form>
         </div>
 
-        <!-- Display a list of users -->
+        <!-- User List and Actions -->
         <div class="user-box">
-            <h2>Select Users to Send a Message:</h2>
             <form method="POST" action="">
-                <div class="select-all-container">
-                    <input type="checkbox" id="select-all" onclick="toggleSelectAll(this)">
-                    <label for="select-all">Select All</label>
-                </div>
                 <div class="user-list">
                     <?php if ($result->num_rows > 0): ?>
-                        <?php while($row = $result->fetch_assoc()): ?>
+                        <label><input type="checkbox" onclick="toggleSelectAll(this)"> Select All</label><br>
+                        <?php while ($row = $result->fetch_assoc()): ?>
                             <div class="user-checkbox">
-                                <input type="checkbox" name="users[]" value="<?= $row['PhoneNumber'] ?>">
-                                <label><?= $row['FullName'] ?> (<?= $row['PhoneNumber'] ?>)</label>
+                                <label><input type="checkbox" name="users[]" value="<?php echo $row['PhoneNumber']; ?>"> <?php echo $row['FullName']; ?> (<?php echo $row['PhoneNumber']; ?>)</label>
                             </div>
                         <?php endwhile; ?>
                     <?php else: ?>
-                        <p>No users found in the database.</p>
+                        <p>No users found.</p>
                     <?php endif; ?>
                 </div>
-                <button type="submit" class="action-btn" name="send_message">Send Message</button>
-                <button type="submit" class="action-btn" name="hello_world">Hello_World</button>
+                <div class="button-container">
+                    <button class="action-btn" type="submit" name="send_message">Booking Confirmed</button>
+                    <button class="action-btn" type="submit" name="hello_world">Hello World</button>
+                    <button class="action-btn" type="submit" name="booking_test">Extend Test</button> <!-- Updated button name -->
+                    <button class="action-btn" type="submit" name="cancel_test">Cancel Test</button> <!-- Added button for cancel_test -->
+                </div>
             </form>
-        </div>
-
-        <!-- Additional buttons below the user list -->
-        <div class="button-container">
-            <!-- Form for Booking_Confirmed button -->
-            <form method="POST" action="booking_confirmed.php">
-                <button type="submit" class="action-btn">Booking_Confirmed</button>
-            </form>
-            <button class="action-btn">Button 3</button>
-            <button class="action-btn">Button 4</button>
-            <button class="action-btn">Button 5</button>
         </div>
     </div>
 </div>
 
 <footer>
-    &copy; 2024 Rodibiko
+    &copy; 2024 Your Company Name. All rights reserved.
 </footer>
 
 </body>
@@ -300,5 +298,5 @@ $result = $conn->query($sql);
 
 <?php
 // Close database connection
-$conn->close();
+mysqli_close($conn);
 ?>
