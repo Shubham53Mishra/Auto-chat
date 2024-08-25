@@ -223,6 +223,37 @@ $result = $conn->query($sql);
         .action-btn:hover {
             background-color: #45a049;
         }
+        .dropdown-container {
+            margin: 20px auto;
+            width: 300px; /* Width of the dropdown container */
+        }
+        .dropdown-container label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+        #dropdown {
+            width: 100%; /* Full width of the container */
+            height: 40px; /* Height of the dropdown */
+            padding: 10px;
+            border: 1px solid #4CAF50; /* Green border */
+            background-color: #4CAF50; /* Green background */
+            color: white; /* White text color */
+            border-radius: 5px; /* Rounded corners */
+            box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+            font-size: 16px;
+            cursor: pointer; /* Cursor indicates dropdown is clickable */
+            transition: background-color 0.3s, border-color 0.3s; /* Smooth transition for background and border color */
+        }
+        #dropdown:hover {
+            background-color: #45a049; /* Slightly darker green on hover */
+            border-color: #388e3c; /* Darker green border on hover */
+        }
+        #dropdown option {
+            background-color: white; /* Background color of options */
+            color: black; /* Text color of options */
+        }
     </style>
 </head>
 <body>
@@ -264,8 +295,9 @@ $result = $conn->query($sql);
                         <p>No users found.</p>
                     <?php endif; ?>
                 </div>
-                <div class="input-box">
-                    <select name="template_name">
+                <div class="dropdown-container">
+                    <label for="dropdown">Select Message Template:</label>
+                    <select id="dropdown" name="template_name">
                         <option value="booking_confirmed">Booking Confirmed</option>
                         <option value="hello_world">Hello World</option>
                         <option value="extend_test">Extend Test</option>
